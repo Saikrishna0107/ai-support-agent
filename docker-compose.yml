@@ -1,0 +1,30 @@
+# Runs PostgreSQL with the pgvector add-on in a Docker container.
+#
+#   Start:  docker compose up -d
+#   Stop:   docker compose down       (your data is kept)
+#   Reset:  docker compose down -v    (deletes ALL data)
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: supportpilot-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres # local development only; never use in production
+      POSTGRES_DB: supportpilot
+    ports:
+      # Only reachable from this computer, not from other devices on the network
+      - "127.0.0.1:5432:5432"
+    volumes:
+      # Keeps your data when the container restarts
+      - pgdata:/var/lib/postgresql/data
+      # Runs once, when the database is first created
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d supportpilot"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
