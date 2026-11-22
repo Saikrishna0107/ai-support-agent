@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     app_name: str = "SupportPilot"
     # Read from DATABASE_URL in .env (names are matched case-insensitively)
-    database_url: str = "postgresql://postgres:postgres@localhost:5432/supportpilot"
+    database_url: str = "postgresql://postgres:postgres@127.0.0.1:5432/supportpilot"
 
 
 # One shared settings object the rest of the app imports
