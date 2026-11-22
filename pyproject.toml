@@ -1,0 +1,10 @@
+[project]
+name = "support-agent"
+version = "0.1.0"
+description = "AI customer support agent with RAG, tool calling, MCP and evals"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+# Lets tests import the "app" package from the project root
+pythonpath = ["."]
+testpaths = ["tests"]

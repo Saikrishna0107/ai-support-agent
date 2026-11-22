@@ -1,0 +1,10 @@
+# Virtual environment (reinstall with: pip install -r requirements.txt)
+.venv/
+
+# Private settings - NEVER commit this
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+.pytest_cache/
